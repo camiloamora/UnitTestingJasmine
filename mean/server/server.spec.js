@@ -4,6 +4,7 @@ const http = require('http');
 const PinsRouter = require('./routes/pins');
 const Pins = require('./models/Pins');
 const request = require('request');
+const axios = require()
 const app = express();
 
 app.use(logger('dev'))
@@ -77,5 +78,36 @@ describe('Testing Router', () => {
       })
     })
 
+  })
+
+
+  describe('POST', () => {
+    it('200', done => {
+      const post = [{
+        title: 'Platzi',
+        author: 'Platzi',
+        description: 'Platzi rules',
+        percentage: 0,
+        tags: [],
+        assets: []
+      }];
+      spyOn(Pins, 'create').and.callFake(callBack => {
+        callBack(false, data);
+      });
+      spyOn(requestPromise, 'get').and.returnValue(
+        Promise.resolve('<title>Platzi</title><meta name="description" content="Platzi rules">')
+      )
+
+
+    });
+
+    it('200 PDF', done => {
+      spyOn(Pins, 'create').and.callFake((pins, callBack) => {
+        callBack(false, {});
+      })
+
+
+
+    });
   })
 })
