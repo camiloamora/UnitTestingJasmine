@@ -95,8 +95,16 @@ fdescribe('FormComponent', () => {
 
   describe('When savePin is executed', () => {
     it('Should navigate to pins view', () => {
+      // Subscripciones como espias para que finalicen el flujo y saber que fueron ejecutados
       const navigate = spyOn((<any>component).navigate, 'goToPins');
       const open = spyOn((<any>component).snackBar, 'open').and.callThrough();
+
+      component.savePin();
+      expect(navigate).toHaveBeenCalled();
+      console.log('working');
+      expect(open).toHaveBeenCalledWith('Your pin is saved, Redirecting ...', 'Cool!', {
+        duration: 2000
+      });
     });
   });
 
